@@ -1,0 +1,76 @@
+{
+  "studio": "Trivisto",
+  "goal": 100,
+  "feedbackRepo": "trivisto/trivisto.github.io",
+  "apps": [
+    {
+      "id": "gallium",
+      "number": 1,
+      "name": "Gallium",
+      "tagline": "Convert any file to any format.",
+      "description": "I got tired of converter websites with upload limits, so I made my own. Right-click any file and turn it into pretty much any other format, all offline.",
+      "features": [
+        "Right-click to convert",
+        "Tons of formats",
+        "Works offline"
+      ],
+      "category": "Files",
+      "accent": [
+        "#9ca3af",
+        "#e5e7eb"
+      ],
+      "icon": "icons/gallium.png",
+      "version": "1.0",
+      "released": "2026-10",
+      "website": "https://sites.google.com/view/get-gallium",
+      "download": "https://sites.google.com/view/get-gallium",
+      "repo": ""
+    },
+    {
+      "id": "orbit",
+      "number": 2,
+      "name": "Orbit",
+      "tagline": "8D, immersive and slowed + reverb audio.",
+      "description": "Made this for the sounds in my edits. It can spin a sound around your head or make it feel like it's coming from everywhere, with exact speed control and reverb.",
+      "features": [
+        "Immersive & 8D",
+        "Exact speed",
+        "Reverb"
+      ],
+      "category": "Audio",
+      "accent": [
+        "#8b5cf6",
+        "#22d3ee"
+      ],
+      "icon": "icons/orbit.png",
+      "version": "1.1.0",
+      "released": "2026-10",
+      "website": "https://trivisto.github.io/orbit/",
+      "download": "https://github.com/trivisto/orbit/releases/latest/download/Orbit-Setup.exe",
+      "repo": "trivisto/orbit"
+    },
+    {
+      "id": "lasso",
+      "number": 3,
+      "name": "Lasso",
+      "tagline": "Remove the background from any image.",
+      "description": "Cuts people, products and pets out of photos using AI that runs on your own PC. No uploads, no limits, and you can touch it up with a brush.",
+      "features": [
+        "Offline AI",
+        "Right-click to remove",
+        "Sticker outlines"
+      ],
+      "category": "Image",
+      "accent": [
+        "#bef264",
+        "#10b981"
+      ],
+      "icon": "icons/lasso.png",
+      "version": "1.1.0",
+      "released": "2026-10",
+      "website": "https://trivisto.github.io/lasso/",
+      "download": "https://github.com/trivisto/lasso/releases/latest/download/Lasso-Setup.exe",
+      "repo": "trivisto/lasso"
+    }
+  ]
+}
