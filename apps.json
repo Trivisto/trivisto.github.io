@@ -19,7 +19,7 @@
         "#9ca3af",
         "#e5e7eb"
       ],
-      "icon": "icons/gallium.png",
+      "icon": "gallium.png",
       "version": "1.0",
       "released": "2026-10",
       "website": "https://sites.google.com/view/get-gallium",
@@ -42,7 +42,7 @@
         "#8b5cf6",
         "#22d3ee"
       ],
-      "icon": "icons/orbit.png",
+      "icon": "orbit.png",
       "version": "1.1.0",
       "released": "2026-10",
       "website": "https://trivisto.github.io/orbit/",
@@ -65,7 +65,7 @@
         "#bef264",
         "#10b981"
       ],
-      "icon": "icons/lasso.png",
+      "icon": "lasso.png",
       "version": "1.1.0",
       "released": "2026-10",
       "website": "https://trivisto.github.io/lasso/",
