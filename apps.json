@@ -71,6 +71,29 @@
       "website": "https://trivisto.github.io/lasso/",
       "download": "https://github.com/trivisto/lasso/releases/latest/download/Lasso-Setup.exe",
       "repo": "trivisto/lasso"
+    },
+    {
+      "id": "squish",
+      "number": 4,
+      "name": "Squish",
+      "tagline": "Make any file smaller without losing quality.",
+      "description": "Shrinks videos, audio, photos, PDFs and Office files to the smallest size that still looks and sounds the same. It can also squeeze a video under Discord's 10 MB limit.",
+      "features": [
+        "Smart, no-quality-loss mode",
+        "Fit under 10 MB",
+        "Right-click any file"
+      ],
+      "category": "Files",
+      "accent": [
+        "#ff5e8a",
+        "#ffc46b"
+      ],
+      "icon": "squish.png",
+      "version": "1.0.0",
+      "released": "2026-10",
+      "website": "https://trivisto.github.io/squish/",
+      "download": "https://github.com/trivisto/squish/releases/latest/download/Squish-Setup.exe",
+      "repo": "trivisto/squish"
     }
   ]
 }
