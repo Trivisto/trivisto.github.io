@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trivisto — free apps for Windows</title>
-<meta name="description" content="I make free apps for Windows. All offline, no accounts. Trying to make 100 of them.">
-<meta property="og:title" content="Trivisto — free apps for Windows">
-<meta property="og:description" content="I make free apps for Windows. All offline, no accounts. Trying to make 100 of them.">
+<title>Trivisto — free apps</title>
+<meta name="description" content="I make free apps for Windows and the web. All offline, no accounts. Trying to make 100 of them.">
+<meta property="og:title" content="Trivisto — free apps">
+<meta property="og:description" content="I make free apps for Windows and the web. All offline, no accounts. Trying to make 100 of them.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script>
   (function () { var t = null; try { t = localStorage.getItem('theme'); } catch (e) {}
@@ -113,6 +113,13 @@ h1 { font-family: var(--display); font-size: clamp(34px, 5vw, 48px); line-height
 .dl:hover { filter: brightness(1.15); transform: translateY(-1px); box-shadow: 0 8px 24px -10px color-mix(in srgb, var(--a) 80%, transparent); }
 .dl:active { transform: scale(.96); }
 .dl svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+/* web apps: run in the browser, can be added to a phone's home screen */
+.app.web { --w: #0ea5e9; background: linear-gradient(100deg, color-mix(in srgb, var(--w) 9%, var(--card)), var(--card) 55%); border-color: color-mix(in srgb, var(--w) 28%, var(--line)); }
+.app.web:hover { border-color: color-mix(in srgb, var(--w) 55%, var(--line)); }
+.webbadge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px 3px 7px; border-radius: 99px; font-size: 12px; font-weight: 700; color: var(--w); background: color-mix(in srgb, var(--w) 14%, transparent); white-space: nowrap; align-self: center; }
+.webbadge svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.dl.open { background: var(--w); color: #fff; }
+.dl.open:hover { box-shadow: 0 8px 24px -10px var(--w); }
 .next { padding: 18px 20px; border: 1px dashed var(--line-2); border-radius: 18px; color: var(--faint); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .next b { color: var(--muted); font-family: var(--mono); font-weight: 500; }
 .empty { color: var(--muted); padding: 30px 0; text-align: center; }
@@ -176,8 +183,8 @@ footer a { text-decoration: none; } footer a:hover { color: var(--text); }
 
   <section class="intro">
     <p class="hey rise" style="animation-delay:.05s">hey <span class="wave">👋</span></p>
-    <h1 class="rise" style="animation-delay:.12s">I'm Trivisto. I make free apps for Windows.</h1>
-    <p class="rise" style="animation-delay:.2s">Mostly stuff I wanted for myself and couldn't find a good free version of, so I built it. Everything here is free, works offline, and doesn't need an account.</p>
+    <h1 class="rise" style="animation-delay:.12s">I'm Trivisto. I make free apps.</h1>
+    <p class="rise" style="animation-delay:.2s">Mostly stuff I wanted for myself and couldn't find a good free version of, so I built it. Most are for Windows, and some run right in your browser on your phone or PC. Everything here is free, works offline, and doesn't need an account.</p>
     <p class="rise" style="animation-delay:.26s">The goal is 100 apps. If something breaks or you have an idea, tell me. I read everything.</p>
   </section>
 
@@ -206,7 +213,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--text); }
     <div class="field"><label for="fbBody" id="fbBodyLabel">More details</label><textarea id="fbBody"></textarea></div>
     <div class="bug-only row2">
       <div class="field"><label for="fbVer">App version</label><input id="fbVer"></div>
-      <div class="field"><label for="fbOs">Windows</label><select id="fbOs"><option>Windows 11</option><option>Windows 10</option><option>Not sure</option></select></div>
+      <div class="field"><label for="fbOs" id="fbOsLabel">Windows</label><select id="fbOs"></select></div>
     </div>
     <p class="note">This opens GitHub with everything filled in. You just press Submit (needs a free GitHub account).</p>
     <div class="m-btns"><button class="btn" id="fbCopy">Copy</button><button class="btn main" id="fbSend">Continue on GitHub</button></div>
@@ -245,22 +252,27 @@ footer a { text-decoration: none; } footer a:hover { color: var(--text); }
 
   // list
   const icoDl = '<svg viewBox="0 0 24 24"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5"/><path d="M5 19h14"/></svg>';
+  const icoOpen = '<svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>';
+  const icoPhone = '<svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/></svg>';
+  const isWeb = (a) => a.type === 'web';
   let query = '';
   if (apps.length > 6) { $('#searchBox').classList.remove('hidden'); $('#q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); render(); }); }
   function row(a, i) {
     const el = document.createElement('article');
-    el.className = 'app rise'; el.id = 'app-' + a.id; el.style.animationDelay = (0.45 + i * 0.08) + 's'; el.style.setProperty('--a', a.accent[0]);
+    const web = isWeb(a);
+    el.className = 'app rise' + (web ? ' web' : ''); el.id = 'app-' + a.id; el.style.animationDelay = (0.45 + i * 0.08) + 's'; el.style.setProperty('--a', a.accent[0]);
     const icon = a.icon
       ? `<div class="icon"><img src="${esc(a.icon)}" alt="" loading="lazy" onerror="this.parentNode.classList.add('mono');this.parentNode.textContent='${esc(a.name[0])}'"></div>`
       : `<div class="icon mono">${esc(a.name[0])}</div>`;
     el.innerHTML = `${icon}
       <div class="info">
-        <div class="name"><h3>${esc(a.name)}</h3><span class="num">#${a.number}</span><span class="ver" data-repo="${esc(a.repo)}">v${esc(a.version)}</span></div>
+        <div class="name"><h3>${esc(a.name)}</h3><span class="num">#${a.number}</span><span class="ver" ${web ? '' : `data-repo="${esc(a.repo)}"`}>v${esc(a.version)}</span>${web ? `<span class="webbadge" title="Runs in your browser. On iPhone: Share → Add to Home Screen">${icoPhone}Web app · iPhone, Android &amp; PC</span>` : ''}</div>
         <p class="tag">${esc(a.tagline)}</p>
         <p class="desc">${esc(a.description)}</p>
         <div class="small-links"><a href="${esc(a.website)}" target="_blank" rel="noopener">website</a><button data-fb="bug" data-app="${esc(a.id)}">report a bug</button><button data-fb="idea" data-app="${esc(a.id)}">suggest something</button></div>
       </div>
-      <a class="dl" href="${esc(a.download)}" ${a.download === a.website ? 'target="_blank" rel="noopener"' : ''}>${icoDl}Download</a>`;
+      ${web ? `<a class="dl open" href="${esc(a.website)}" target="_blank" rel="noopener">${icoOpen}Open</a>`
+            : `<a class="dl" href="${esc(a.download)}" ${a.download === a.website ? 'target="_blank" rel="noopener"' : ''}>${icoDl}Download</a>`}`;
     return el;
   }
   function render() {
@@ -294,8 +306,14 @@ footer a { text-decoration: none; } footer a:hover { color: var(--text); }
   sel.innerHTML = apps.map(a => `<option value="${esc(a.id)}">${esc(a.name)}</option>`).join('') + '<option value="new">A new app idea</option><option value="site">This website</option>';
   let type = 'bug';
   const verOf = (id) => { const a = apps.find(x => x.id === id); return a ? (vc[a.repo] || 'v' + a.version).replace(/^v/, '') : ''; };
+  function setDevice() {
+    const a = apps.find(x => x.id === sel.value), web = a && isWeb(a);
+    $('#fbOsLabel').textContent = web ? 'Device' : 'Windows';
+    const opts = web ? ['iPhone (Safari)', 'iPhone (home screen app)', 'Android', 'PC browser', 'Mac browser'] : ['Windows 11', 'Windows 10', 'Not sure'];
+    if ($('#fbOs').dataset.kind !== String(web)) { $('#fbOs').innerHTML = opts.map(o => `<option>${o}</option>`).join(''); $('#fbOs').dataset.kind = String(web); }
+  }
   function setType(t) {
-    type = t;
+    type = t; setDevice();
     $('#fbTabs').classList.toggle('idea', t === 'idea');
     $('#fbTabs').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
     document.querySelectorAll('.bug-only').forEach(e => e.classList.toggle('hidden', t !== 'bug'));

@@ -94,6 +94,30 @@
       "website": "https://trivisto.github.io/squish/",
       "download": "https://github.com/trivisto/squish/releases/latest/download/Squish-Setup.exe",
       "repo": "trivisto/squish"
+    },
+    {
+      "id": "pixel",
+      "number": 5,
+      "type": "web",
+      "name": "Pixel",
+      "tagline": "QR codes that actually look good.",
+      "description": "Make QR codes for links, Wi-Fi, contacts and more, and style every part: dots, corners, gradients, a photo background, your own picture in the middle. It checks your design still scans, and it scans codes too. Runs in your browser, and you can add it to your iPhone Home Screen.",
+      "features": [
+        "Heavy styling: shapes, gradients, photo, logo, frame",
+        "Live check that your code still scans",
+        "Scan with your camera or from a photo"
+      ],
+      "category": "Utility",
+      "accent": [
+        "#f5a300",
+        "#ffd84d"
+      ],
+      "icon": "pixel.png",
+      "version": "1.0.0",
+      "released": "2026-10",
+      "website": "https://trivisto.github.io/pixel/",
+      "download": "https://trivisto.github.io/pixel/",
+      "repo": "trivisto/pixel"
     }
   ]
 }
