@@ -22,9 +22,9 @@
       "icon": "gallium.png",
       "version": "1.0",
       "released": "2026-10",
-      "website": "https://sites.google.com/view/get-gallium",
-      "download": "https://sites.google.com/view/get-gallium",
-      "repo": ""
+      "website": "https://trivisto.github.io/gallium/",
+      "download": "https://github.com/trivisto/gallium/releases/latest/download/Gallium-Setup.exe",
+      "repo": "trivisto/gallium"
     },
     {
       "id": "orbit",
